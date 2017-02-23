@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-
+import posixpath
 from http.server import HTTPServer, BaseHTTPRequestHandler
+from urllib.parse import urlparse
 
 from eventbritefeed.client import EventbriteClient
 
@@ -10,8 +11,9 @@ class EventbriteFeedRequestHandler(BaseHTTPRequestHandler):
 
     # GET
     def do_GET(self):
+        org = self._get_org_id()
         client = EventbriteClient()
-        result = client.get_feed(':orgId')
+        result = client.get_feed(org)
 
         # Send response status code
         self.send_response(200)
@@ -21,8 +23,21 @@ class EventbriteFeedRequestHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
         # Write content as utf-8 data
+        # self.wfile.write(bytes('hello!', 'utf-8'))
         self.wfile.write(result)
         return
+
+    def _get_org_id(self):
+        return self.path_array[0]
+
+    @property
+    def path_array(self):
+        head = posixpath.normpath(urlparse(self.path).path)
+        result = []
+        while head != "/":
+            (head, tail) = posixpath.split(head)
+            result.insert(0, tail)
+        return result
 
 
 class EventbriteFeedHTTPServer(HTTPServer):
