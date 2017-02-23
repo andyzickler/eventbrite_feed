@@ -1,0 +1,23 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+    "settings": {
+    },
+    "SublimeLinter": {
+        "@python": 3.6,
+        "linters":
+        {
+            "flake8": {
+                "@disable": true
+            },
+            "pylint": {
+                "@disable": false,
+                "paths": ["venv/lib/python3.6/site-packages"]
+            }
+        }
+    }
+}
