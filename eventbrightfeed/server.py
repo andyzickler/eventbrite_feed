@@ -3,7 +3,7 @@
 from http.server import BaseHTTPRequestHandler
 import requests
 
-from .feed import EventBrightFeed
+from .feed import EventBrightFeedGenerator
 
 
 # HTTPRequestHandler class
@@ -27,7 +27,7 @@ class EventBrightFeedRequestHandler(BaseHTTPRequestHandler):
         events.extend(first_data['events'])
         events.extend(second_data['events'])
 
-        ebf = EventBrightFeed(events)
+        ebf = EventBrightFeedGenerator(events)
 
         # Send response status code
         self.send_response(200)
@@ -38,7 +38,7 @@ class EventBrightFeedRequestHandler(BaseHTTPRequestHandler):
 
         # Write content as utf-8 data
         # self.wfile.write(bytes(message, "utf8"))
-        self.wfile.write(ebf.get_atom())
+        self.wfile.write(ebf.atom_str(pretty=True))
         return
 
 
