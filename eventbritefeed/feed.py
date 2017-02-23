@@ -2,13 +2,13 @@ from feedgen.feed import FeedGenerator
 # import dateutil.parser
 
 
-class EventBrightFeedGenerator(FeedGenerator):
+class EventbriteFeedGenerator(FeedGenerator):
     """
     Class that takes a converts a list of events and generates a feed
     """
 
     def __init__(self, events):
-        super(EventBrightFeedGenerator, self).__init__()
+        super(EventbriteFeedGenerator, self).__init__()
         self.events = events
         self.id(events[0]['organizer']['id'])
         self.title("Eventbrite: {}".format(events[0]['organizer']['name']))
@@ -20,7 +20,7 @@ class EventBrightFeedGenerator(FeedGenerator):
             feed_entry = self.add_entry()
             feed_entry.id(event['url'])
             feed_entry.title(event['name']['text'])
-            feed_entry.content(EventBrightFeedGenerator._event_html(event), type='html')
+            feed_entry.content(EventbriteFeedGenerator._event_html(event), type='html')
             feed_entry.link(href=event['url'], rel='via')
             feed_entry.published(event['start']['utc'])
             feed_entry.updated(event['start']['utc'])

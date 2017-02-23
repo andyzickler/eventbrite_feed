@@ -1,6 +1,6 @@
 from http.server import HTTPServer
 
-from eventbrightfeed.server import EventBrightFeedRequestHandler
+from eventbritefeed.server import EventbriteFeedRequestHandler
 
 def run():
     print('starting server...')
@@ -8,7 +8,7 @@ def run():
     # Server settings
     # Choose port 8080, for port 80, which is normally used for a http server, you need root access
     server_address = ('127.0.0.1', 3000)
-    httpd = HTTPServer(server_address, EventBrightFeedRequestHandler)
+    httpd = HTTPServer(server_address, EventbriteFeedRequestHandler)
     print('running server...')
     httpd.serve_forever()
 

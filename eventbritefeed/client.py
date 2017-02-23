@@ -1,9 +1,9 @@
 import requests
 
-from eventbrightfeed.feed import EventBrightFeedGenerator
+from eventbritefeed.feed import EventbriteFeedGenerator
 
 
-class EventBriteClient(object):
+class EventbriteClient(object):
 
 
     def get_feed(self):
@@ -21,5 +21,5 @@ class EventBriteClient(object):
         events.extend(first_data['events'])
         events.extend(second_data['events'])
 
-        ebf = EventBrightFeedGenerator(events)
+        ebf = EventbriteFeedGenerator(events)
         return ebf.atom_str(pretty=True)

@@ -2,15 +2,15 @@
 
 from http.server import BaseHTTPRequestHandler
 
-from eventbrightfeed.client import EventBriteClient
+from eventbritefeed.client import EventbriteClient
 
 
 # HTTPRequestHandler class
-class EventBrightFeedRequestHandler(BaseHTTPRequestHandler):
+class EventbriteFeedRequestHandler(BaseHTTPRequestHandler):
 
     # GET
     def do_GET(self):
-        client = EventBriteClient()
+        client = EventbriteClient()
         result = client.get_feed()
 
         # Send response status code
