@@ -12,6 +12,10 @@ class EventbriteFeedRequestHandler(BaseHTTPRequestHandler):
     # GET
     def do_GET(self):
         org = self._get_org_id()
+        if org is None:
+            # TODO: We need better error handling
+            self.send_response(404)
+            return
         client = EventbriteClient()
         result = client.get_feed(org)
 
@@ -28,7 +32,10 @@ class EventbriteFeedRequestHandler(BaseHTTPRequestHandler):
         return
 
     def _get_org_id(self):
-        return self.path_array[0]
+        org, org_id = self.path_array[:2]
+        if org == 'org' and org_id is not None:
+            return org_id
+        return None
 
     @property
     def path_array(self):
