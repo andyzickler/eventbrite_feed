@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
-from http.server import BaseHTTPRequestHandler, HTTPServer
-from event_bright_feed import EventBrightFeed
+from http.server import BaseHTTPRequestHandler
 import requests
+
+from .event_bright_feed import EventBrightFeed
 
 
 # HTTPRequestHandler class
@@ -40,19 +41,6 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         self.wfile.write(ebf.get_atom())
         return
 
-
-def run():
-    print('starting server...')
-
-    # Server settings
-    # Choose port 8080, for port 80, which is normally used for a http server, you need root access
-    server_address = ('127.0.0.1', 3000)
-    httpd = HTTPServer(server_address, testHTTPServer_RequestHandler)
-    print('running server...')
-    httpd.serve_forever()
-
-
-run()
 
 # HTTPRequestHandler only deals with HTTP and the EvenBrightFeelController
 # EventBrightClient 
