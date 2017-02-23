@@ -11,7 +11,7 @@ class EventbriteFeedRequestHandler(BaseHTTPRequestHandler):
     # GET
     def do_GET(self):
         client = EventbriteClient()
-        result = client.get_feed()
+        result = client.get_feed(':orgId')
 
         # Send response status code
         self.send_response(200)
