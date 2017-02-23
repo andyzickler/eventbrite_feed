@@ -7,7 +7,7 @@ from .event_bright_feed import EventBrightFeed
 
 
 # HTTPRequestHandler class
-class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
+class EventBrightFeedRequestHandler(BaseHTTPRequestHandler):
 
     # GET
     def do_GET(self):
@@ -43,16 +43,16 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
 
 
 # HTTPRequestHandler only deals with HTTP and the EvenBrightFeelController
-# EventBrightClient 
+# EventBrightClient
 # - dif updates of cache
-# EvenBrightFeedController -> returns 
-# 
-# 
+# EvenBrightFeedController -> returns
+#
+#
 # class EventbriteEvent
-# class EventBriteFeed 
+# class EventBriteFeed
 # class EventBriteClient - queries event brite, returns EventBriteFeed
 # class resourceController(EventBriteClient) returns strings (xml, json, etc)
 # class RequestHandler(resourceController)
 # class server(options, requestHandler)
-# 
-# 
+#
+#
