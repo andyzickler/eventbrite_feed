@@ -3,7 +3,7 @@
 from http.server import BaseHTTPRequestHandler
 import requests
 
-from .event_bright_feed import EventBrightFeed
+from .feed import EventBrightFeed
 
 
 # HTTPRequestHandler class
