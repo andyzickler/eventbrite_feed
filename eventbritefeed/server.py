@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from http.server import BaseHTTPRequestHandler
+from http.server import HTTPServer, BaseHTTPRequestHandler
 
 from eventbritefeed.client import EventbriteClient
 
@@ -24,6 +24,10 @@ class EventbriteFeedRequestHandler(BaseHTTPRequestHandler):
         self.wfile.write(result)
         return
 
+
+class EventbriteFeedHTTPServer(HTTPServer):
+    def __init__(self, server_address):
+        super(EventbriteFeedHTTPServer, self).__init__(server_address, EventbriteFeedRequestHandler)
 
 # HTTPRequestHandler only deals with HTTP and the EvenBrightFeelController
 # EventBrightClient
