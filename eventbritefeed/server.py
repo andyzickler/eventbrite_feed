@@ -32,6 +32,8 @@ class EventbriteFeedRequestHandler(BaseHTTPRequestHandler):
         return
 
     def _get_org_id(self):
+        if len(self.path_array) is not 2:
+            return None
         org, org_id = self.path_array[:2]
         if org == 'org' and org_id is not None:
             return org_id
