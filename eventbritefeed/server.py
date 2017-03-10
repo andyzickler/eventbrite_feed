@@ -5,6 +5,9 @@ from urllib.parse import urlparse
 
 from eventbritefeed.client import EventbriteClient
 
+# TODO: Figure out how to pass client to EventbriteFeedRequestHandler instances
+client = EventbriteClient()
+
 
 # HTTPRequestHandler class
 class EventbriteFeedRequestHandler(BaseHTTPRequestHandler):
@@ -16,7 +19,6 @@ class EventbriteFeedRequestHandler(BaseHTTPRequestHandler):
             # TODO: We need better error handling
             self.send_response(404)
             return
-        client = EventbriteClient()
         result = client.get_feed(org)
 
         # Send response status code
