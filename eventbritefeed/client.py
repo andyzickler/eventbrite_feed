@@ -1,5 +1,7 @@
+import operator
 import requests
 
+from cachetools import TTLCache, cachedmethod
 from eventbritefeed.feed import EventbriteFeedGenerator
 
 
@@ -8,7 +10,9 @@ class EventbriteClient(object):
 
     def __init__(self):
         self.session = requests.Session()
+        self.cache = TTLCache(maxsize=20, ttl=600)
 
+    @cachedmethod(operator.attrgetter('cache'))
     def _get_all_events(self, org):
         events = []
         page_num = 1
