@@ -5,12 +5,12 @@ from urllib.parse import urlparse
 
 from eventbritefeed.client import EventbriteClient
 
-# TODO: Figure out how to pass client to EventbriteFeedRequestHandler instances
-client = EventbriteClient()
-
 
 # HTTPRequestHandler class
 class EventbriteFeedRequestHandler(BaseHTTPRequestHandler):
+    def __init__(self, request, client_address, server, eb_client):
+        self.eb_client = eb_client
+        super(EventbriteFeedRequestHandler, self).__init__(request, client_address, server)
 
     # GET
     def do_GET(self):
@@ -19,7 +19,7 @@ class EventbriteFeedRequestHandler(BaseHTTPRequestHandler):
             # TODO: We need better error handling
             self.send_response(404)
             return
-        result = client.get_feed(org)
+        result = self.eb_client.get_feed(org)
 
         # Send response status code
         self.send_response(200)
@@ -54,6 +54,10 @@ class EventbriteFeedRequestHandler(BaseHTTPRequestHandler):
 class EventbriteFeedHTTPServer(HTTPServer):
     def __init__(self, server_address):
         super(EventbriteFeedHTTPServer, self).__init__(server_address, EventbriteFeedRequestHandler)
+        self.eb_client = EventbriteClient()
+
+    def finish_request(self, request, client_address):
+        self.RequestHandlerClass(request, client_address, self, self.eb_client)
 
 # HTTPRequestHandler only deals with HTTP and the EvenBrightFeelController
 # EventBrightClient
